@@ -32,7 +32,9 @@ export class PostComponent implements OnInit {
       this.post.article = item;
       this.hackerNewsService.getEnrichedStory(this.post.article).subscribe(itemRich => {
         this.post.article = itemRich;
-        this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.post.article.content);
+        if (this.post.article.content) {
+          this.post.article.content = this.sanitizer.bypassSecurityTrustHtml(this.post.article.content);
+        }
       });
       this.titleService.setTitle(item.title);
       this.onScroll();
